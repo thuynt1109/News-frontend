@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createBrowserHistory } from 'history';
+import React, { useEffect } from 'react';
+import { renderRoutes } from 'react-router-config';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './AppRoutes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: '#f5f5f5',
+    },
+  }),
+);
+
+const App: React.FC = () => {
+  useEffect(() => {
+    document.title = 'News';
+  }, []);
+
+  return <Router>{renderRoutes(AppRoutes)}</Router>;
+};
 
 export default App;
