@@ -1,17 +1,31 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import react from 'react';
+import { mount, route } from 'navi';
+import SignIn from './components/views/user/SignIn';
+import SignUp from './components/views/user/SignUp';
+import Home from './components/views/home/Home';
+import { Router } from 'react-navi';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { withAuthentication } from './components/views/user/authenticatedRoute';
+import { TOKEN_KEY } from './configs/axios';
 
+const routes = mount({
+  '/': route({
+    title: 'Login',
+    view: <SignIn />,
+  }),
+  '/sign-up': route({
+    title: 'SignUp',
+    view: <SignUp />,
+  }),
+  '/home': route({
+    title: 'Home',
+    view: <Home />,
+  }),
+});
+
+//gan token vao context de function withAuthentication co the su dung dc token.
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Router routes={routes} context={{ token: localStorage.getItem(TOKEN_KEY) }} />,
+  document.getElementById('root'),
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
