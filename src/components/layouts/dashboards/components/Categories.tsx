@@ -1,6 +1,8 @@
 import { makeStyles, Typography } from '@material-ui/core';
 import 'fontsource-roboto';
 import React from 'react';
+import { Category } from '../../../../configs/interfaces';
+// import { apiGet } from '../../../../configs/axios';
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -17,8 +19,13 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
+interface Props {
+  categoriesList: Category[];
+}
+
 const Categories: React.FC = () => {
   const classes = useStyle();
+
   return (
     <div>
       <Typography variant="h1" component="div" className={classes.root} align="center">

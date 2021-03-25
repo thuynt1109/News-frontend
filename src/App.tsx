@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { createBrowserHistory } from 'history';
 import React, { useEffect } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { BrowserRouter as Router } from 'react-router-dom';

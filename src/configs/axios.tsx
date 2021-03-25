@@ -1,7 +1,7 @@
 import axios from 'axios';
 import STATUS_CODE from 'http-status';
 import { backendBaseUrl } from './APIs';
-import { LoginAPIResponse } from './interfaces';
+import { LoginAPIResponse, HTTPdata } from './interfaces';
 import { getAuthToken } from './localStore';
 import MESSAGE from './message';
 import { showSnackBarAlert } from './utils';
@@ -49,6 +49,45 @@ api.interceptors.response.use(
     return Promise.reject(err);
   },
 );
+// /** GET */
+// export const apiGet = (url: string, pramas?: object) =>
+//   api({
+//     method: 'GET',
+//     url: url,
+//     params: pramas,
+//   })
+//     .then((res) => res.data as HTTPdata)
+//     .catch((err) => handleApiError(err));
+// /** POST */
+// export const apiPost = (url: string, data?: object) =>
+//   api({
+//     method: 'POST',
+//     url: url,
+//     data: data,
+//   })
+//     .then((res) => res.data as HTTPdata)
+//     .catch((err) => handleApiError(err));
+
+// /** PUT */
+// export const apiPut = (url: string, params?: object, data?: object) =>
+//   api({
+//     method: 'PUT',
+//     url: url,
+//     params: params,
+//     data: data,
+//   })
+//     .then((res) => res.data as HTTPdata)
+//     .catch((err) => handleApiError(err));
+
+// /** DELETE */
+// export const apiDelete = (url: string, params?: object) =>
+//   api({
+//     method: 'DELETE',
+//     url: url,
+//     params: params,
+//   })
+//     .then((res) => res.data as HTTPdata)
+//     .catch((err) => handleApiError(err));
 
 /** Error handler */
 function handleApiError(err: any) {

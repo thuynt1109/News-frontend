@@ -5,7 +5,7 @@ import SignIn from './components/views/user/SignIn';
 import SignOut from './components/views/user/SignOut';
 import Auth from './components/layouts/auth/auth';
 import SignUp from './components/views/user/SignUp';
-
+import DashBoard from '../src/components/layouts/dashboards/dashboard';
 const routes = [
   {
     path: '/',
@@ -34,9 +34,15 @@ const routes = [
     ],
   },
   {
-    path: '/home',
-    exact: true,
-    component: Home,
+    path: '*',
+    component: DashBoard,
+    routes: [
+      {
+        path: '/home',
+        exact: true,
+        component: Home,
+      },
+    ],
   },
 ];
 

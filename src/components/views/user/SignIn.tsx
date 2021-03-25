@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect, MouseEvent } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +17,8 @@ import * as APIs from '../../../configs/APIs';
 import { authPost } from '../../../configs/axios';
 import { validate, loginMessagesForm } from './validate';
 import { LoginInputType } from '../../../configs/inputType';
+import STATUS_CODE from 'http-status';
+
 const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -30,6 +33,12 @@ const Copyright = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    justifyContent: 'center',
+    // padding: '110px 0px 110px 0px',
+    // height: '80vh',
+    // height: '50%',
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -70,6 +79,7 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [errorMessageUsername, setErrorMessageUsername] = React.useState('');
   const [errorMessagePassword, setErrorMessagePassword] = React.useState('');
+  console.log(test);
 
   React.useEffect(() => {
     localStorage.clear();
@@ -121,26 +131,30 @@ const SignIn = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container} maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
+      <Box className={classes.paper}>
+        {/** header */}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate onSubmit={submitLoginForm}>
+
+        {/** input */}
+        <form className={classes.form} noValidate={true} onSubmit={submitLoginForm}>
           <TextField
             variant="outlined"
             margin="normal"
-            required
-            fullWidth
+            // required={true}
+            fullWidth={true}
             id="username"
-            label="Username"
             name="username"
-            // autoComplete="username"
-            // autoFocus
+            label="username"
+            type="text"
+            autoComplete="username"
+            autoFocus={true}
             onChange={onInputChangeHandler}
             error={errorMessageUsername ? true : false}
             helperText={errorMessageUsername}
@@ -148,16 +162,19 @@ const SignIn = () => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
+            // required={true}
+            fullWidth={true}
             id="password"
+            name="password"
+            label="password"
+            type="password"
+            autoComplete="current-password"
             onChange={onInputChangeHandler}
             error={errorMessagePassword ? true : false}
             helperText={errorMessagePassword}
           />
+
+          {/** check box remember me */}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -170,26 +187,45 @@ const SignIn = () => {
             </span>
           </Box>
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Link href="/auth/sign-in" variant="body2">
-                {"Don't have an account? Sign Up"}
+          {/** submit button */}
+          <input id="login-button" type="submit" style={{ display: 'none' }} />
+          <label htmlFor="login-button">
+            <Button
+              fullWidth={true}
+              variant="contained"
+              size="medium"
+              component="span"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+          </label>
+
+          {/** other links */}
+          {/* <Grid container={true}>
+            <Grid item={true} xs={12}>
+              <Link href="#" variant="body2">
+                Forgot password?
               </Link>
             </Grid>
-          </Grid>
+            <Grid item={true} xs={12}>
+              <Link href="#" variant="body2">
+                Don't have an account? Contact admin for new account
+              </Link>
+            </Grid>
+          </Grid> */}
         </form>
-      </div>
+      </Box>
     </Container>
   );
+};
+
+/* collect data from redux store */
+const mapStateToProps = (state: any) => {
+  return {
+    isDisable: state.commonReducer.isDisable,
+  };
 };
 
 export default SignIn;

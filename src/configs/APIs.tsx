@@ -9,3 +9,8 @@ general APIs
 
 export const loginUrl = '/users/login/';
 export const uerInfor = '/users/decode';
+
+/** Category APIs */
+export const categoryScreenUrl = backendBaseUrl + '/category';
+export const getAllCategory = categoryScreenUrl + '/getAll';
+export const updateCaterory = categoryScreenUrl + '/update';

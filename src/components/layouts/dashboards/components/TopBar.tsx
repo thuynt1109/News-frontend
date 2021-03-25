@@ -6,7 +6,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
 
 import React from 'react';
-import Categories from './Categories';
+import { Category } from '../../../../configs/interfaces';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,8 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopBar: React.FC = () => {
+interface Props {
+  CategoryItem: Category[];
+}
+
+const TopBar: React.FC<Props> = (props) => {
   const classes = useStyles();
+
   return (
     <>
       <AppBar position="sticky" className={classes.root} elevation={1}>
@@ -59,7 +64,6 @@ const TopBar: React.FC = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Categories />
     </>
   );
 };
